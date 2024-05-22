@@ -80,7 +80,7 @@ export default async function Home() {
       </div>
       <div className='text-center mt-5 mb-5 flex items-center justify-center gap-5 flex-wrap'>
         <Link className='history__btn' href={"/history"}>Muassasa tarixi</Link>
-        <Link className='history__btn' href={"/contact"}>Aloqa</Link>
+        <Link className='history__btn' href={"/contact"}>Xabar yuborish</Link>
       </div>
     </>
   )
