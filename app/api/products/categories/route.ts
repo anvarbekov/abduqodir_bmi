@@ -1,13 +1,21 @@
-import { NextRequest, NextResponse } from 'next/server'
+import data from '@/lib/data'
 import dbConnect from '@/lib/dbConnect'
 import ProductModel from '@/lib/models/ProductModel'
+import UserModel from '@/lib/models/UserModel'
+import { NextRequest, NextResponse } from 'next/server'
 
-export const GET = async (req: NextRequest) => {
-  try {
-    await dbConnect()
-    const categories = await ProductModel.find().distinct('category')
-    return NextResponse.json(categories)
-  } catch (error) {
-    return NextResponse.json({ error: 'Something went wrong' }, { status: 500 })
-  }
+export const GET = async (request: NextRequest) => {
+  const { users, products } = data
+  await dbConnect()
+  await UserModel.deleteMany()
+  await UserModel.insertMany(users)
+
+  await ProductModel.deleteMany()
+  await ProductModel.insertMany(products)
+
+  return NextResponse.json({
+    message: 'seeded successfully',
+    users,
+    products,
+  })
 }
