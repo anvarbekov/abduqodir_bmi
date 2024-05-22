@@ -5,17 +5,22 @@ import UserModel from '@/lib/models/UserModel'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const GET = async (request: NextRequest) => {
-  const { users, products } = data
-  await dbConnect()
-  await UserModel.deleteMany()
-  await UserModel.insertMany(users)
+  try {
+    const { users, products } = data
+    await dbConnect()
 
-  await ProductModel.deleteMany()
-  await ProductModel.insertMany(products)
+    await UserModel.deleteMany()
+    await UserModel.insertMany(users)
 
-  return NextResponse.json({
-    message: 'seeded successfully',
-    users,
-    products,
-  })
+    await ProductModel.deleteMany()
+    await ProductModel.insertMany(products)
+
+    return NextResponse.json({
+      message: 'Seeded successfully',
+      users,
+      products,
+    })
+  } catch (error) {
+    return NextResponse.json({ error: 'Seeding failed', details: error }, { status: 500 })
+  }
 }
