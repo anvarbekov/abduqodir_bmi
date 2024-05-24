@@ -1,21 +1,8 @@
-import data from '@/lib/data'
 import dbConnect from '@/lib/dbConnect'
 import ProductModel from '@/lib/models/ProductModel'
-import UserModel from '@/lib/models/UserModel'
-import { NextRequest, NextResponse } from 'next/server'
 
-export const GET = async (request: NextRequest) => {
-  const { users, products } = data
+export const GET = async (req: any) => {
   await dbConnect()
-  await UserModel.deleteMany()
-  await UserModel.insertMany(users)
-
-  await ProductModel.deleteMany()
-  await ProductModel.insertMany(products)
-
-  return NextResponse.json({
-    message: 'seeded successfully',
-    users,
-    products,
-  })
+  const categories = await ProductModel.find().distinct('category')
+  return Response.json(categories)
 }
