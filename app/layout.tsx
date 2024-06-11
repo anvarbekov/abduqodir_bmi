@@ -12,7 +12,7 @@ const bellota = Bellota({ subsets: ['latin'], weight: ["400"]})
 
 export const metadata: Metadata = {
   title: "Surxondaryo viloyati Qumqo'rg'on tumani 2-son kasb-hunar maktabining rasmiy veb sayti",
-  description: 'Modern ECommerce Website',
+  description: 'Modern Education Website',
 }
 
 export default function RootLayout({

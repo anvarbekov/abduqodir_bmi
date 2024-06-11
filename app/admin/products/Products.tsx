@@ -63,7 +63,7 @@ export default function Products() {
           className="btn btn-primary btn-sm"
         >
           {isCreating && <span className="loading loading-spinner"></span>}
-          Create
+          Qoshish
         </button>
       </div>
 
